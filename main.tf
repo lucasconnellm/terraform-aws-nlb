@@ -106,7 +106,7 @@ resource "aws_security_group_rule" "allow_port_443_ingress_for_http_to_https_red
 }
 
 resource "aws_security_group_rule" "egress" {
-  count             = var.load_balancer_type == "network" ? 0 : 1
+  count             = var.load_balancer_type == "network" ? 1 : 1  # Hack for creating sg even on network lb
   security_group_id = aws_security_group.main[0].id
   type              = "egress"
   protocol          = "-1"
